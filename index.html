@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Помощник в принятии решний</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>
+
+  <div class="spin-wrapper" style="opacity: 1;">
+    <div class="spinner">
+    </div>
+  </div>
+
+  <div class="main" style="opacity: 0">
+    <header>
+      <h1> Аналитическая иерархия процессов </h1>
+
+      <div class="breadcrumbs">
+
+        <div class="breadcrumbs_group">
+          <div class="breadcrumbs_step is-active" data-link="0">
+            <span class="__number">1</span>
+            <span class="__help">Искомые параметры</span>
+          </div>
+
+          <div class="breadcrumbs_step" data-link="1">
+            <span class="__number">2</span>
+            <span class="__help">Оценка важности</span>
+          </div>
+
+          <div class="breadcrumbs_step" data-link="2">
+            <span class="__number">3</span>
+            <span class="__help">Результат</span>
+          </div>
+        </div>
+
+        <div class="breadcrumbs_line"> <div class="breadcrumbs_line__is-active"></div> </div>
+      </div>
+
+    </header>
+
+
+    <!-- Инициализация параметров -->
+    <section class="is-active" data-sect="0">
+      <h2>Искомые параметры</h2>
+      <div class="Initializ">
+        <div class="Initializ_content">
+          <input name="AltN" id="AltN" placeholder="Число альтернатив" type="number" />
+          <input name="AppN" id="AppN" placeholder="Число критериев" type="number" />
+          <button type="button" class="light" onclick="InitializGo();">Готово</button>
+        </div>
+      </div>
+
+      <div class="Forms" data-to="varInit">
+        <div class="__header">
+          <div class="__header_item"><span>Альтернативы</span></div>
+          <div class="__header_item"><span>Критерии</span></div>
+        </div>
+        <div class="Forms_content">
+          <div class="__item" data-to="alt"></div>
+          <div class="__item" data-to="app"></div>
+        </div>
+        <div class="button_group">
+          <button onclick="onClear()" class="light" data-is-hide>Сбросить</button>
+          <button onclick="varInit()" data-link="1">Следующий шаг</button>
+        </div>
+      </div>
+
+      <div class="footer_info"> <span>Обратите внимание, количество альтернатив и критериев не может быть меньше двух.</span> </div>
+    </section>
+
+    <!-- Оценка возможностей -->
+    <section data-sect="1">
+      <h2>Оценка важности <span>критериев и альтернатив</span></h2>
+      <div class="initializ_table">
+        <div class="__item" data-to="table-app" data-check-empty></div>
+        <div class="button_group">
+          <button onclick="onClear()" class="light" data-link="0" data-is-hide>Сбросить</button>
+          <button type="button" onclick="onClearTable()" class="light">Очистить</button>
+          <button type="button" onclick="onCalcWeight()">Рассчитать</button>
+          <button type="button" onclick="onCalcWeight()" data-link="2">Получить результат</button>
+        </div>
+      </div>
+
+      <div class="empty">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M 4 4 L 4 46 L 35.414062 46 L 46 35.414062 L 46 35 L 46 4 L 4 4 z M 6 6 L 44 6 L 44 34 L 34 34 L 34 44 L 6 44 L 6 6 z M 14 15 L 14 17 L 37 17 L 37 15 L 14 15 z M 14 21 L 14 23 L 37 23 L 37 21 L 14 21 z M 14 27 L 14 29 L 37 29 L 37 27 L 14 27 z M 36 36 L 42.585938 36 L 36 42.585938 L 36 36 z" fill="#1a1a1a"></path></svg>
+        <span><b>Здесь пусто!</b> Укажите искомые параметры.</span>
+      </div>
+    </section>
+
+    <!-- Вывод результатов -->
+    <section data-sect="2">
+      <h2>Результат</h2>
+      <div class="rezult_table">
+        <div class="__item" data-to="table-res" data-check-empty></div>
+        <div class="button_group">
+          <button onclick="onClear()" class="light" data-link="0" data-is-hide>Сбросить</button>
+          <button type="button" data-link="1">Посмотреть результат вычислений </button>
+        </div>
+      </div>
+
+      <div class="empty">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M 4 4 L 4 46 L 35.414062 46 L 46 35.414062 L 46 35 L 46 4 L 4 4 z M 6 6 L 44 6 L 44 34 L 34 34 L 34 44 L 6 44 L 6 6 z M 14 15 L 14 17 L 37 17 L 37 15 L 14 15 z M 14 21 L 14 23 L 37 23 L 37 21 L 14 21 z M 14 27 L 14 29 L 37 29 L 37 27 L 14 27 z M 36 36 L 42.585938 36 L 36 42.585938 L 36 36 z" fill="#1a1a1a"></path></svg>
+        <span><b>Здесь пусто!</b> Укажите искомые параметры и дайте оценку важности критериев и альтернатив.</span>
+      </div>
+    </section>
+
+
+    <div class="error">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><path fill="#f7a8a8" d="M2.5,26.5c-0.552,0-1-0.449-1-1c0-0.176,0.046-0.348,0.134-0.499 c0.17-0.294,5.604-9.417,9.198-15.453c3.274-5.498,3.274-5.498,3.286-5.521C14.289,3.705,14.628,3.5,15,3.5 s0.711,0.205,0.886,0.534c0.008,0.016,0.008,0.016,3.282,5.514c3.595,6.036,9.028,15.159,9.198,15.452 c0.088,0.152,0.134,0.324,0.134,0.5c0,0.551-0.448,1-1,1H2.5z"></path><path fill="#c74343" d="M15,4c0.222,0,0.375,0.138,0.443,0.267c0.016,0.03,0.016,0.03,2.96,4.974 c3.5,5.876,9.357,15.71,9.531,16.01C27.978,25.327,28,25.411,28,25.5c0,0.276-0.224,0.5-0.5,0.5h-25C2.224,26,2,25.776,2,25.5 c0-0.089,0.022-0.173,0.066-0.249c0.174-0.3,6.034-10.14,9.536-16.019c2.939-4.934,2.939-4.934,2.955-4.964 C14.625,4.138,14.778,4,15,4 M15,3c-0.576,0-1.076,0.324-1.327,0.8C13.66,3.825,1.46,24.302,1.201,24.75 C1.073,24.97,1,25.227,1,25.5C1,26.328,1.672,27,2.5,27c0.63,0,24.37,0,25,0c0.828,0,1.5-0.672,1.5-1.5 c0-0.273-0.073-0.53-0.201-0.75C28.54,24.302,16.34,3.825,16.327,3.8C16.076,3.324,15.576,3,15,3L15,3z"></path><path fill="#36404d" d="M15 21A1.474 1.5 0 1 0 15 24A1.474 1.5 0 1 0 15 21Z"></path><path fill="#c74343" d="M1.227 12.973l4.367.485c.185-.31.374-.628.562-.944l-4.367-.485C1.596 12.352 1.41 12.665 1.227 12.973zM3.969 8.368l3.487 1.962c.17-.285.341-.572.512-.859L4.481 7.509C4.305 7.805 4.139 8.082 3.969 8.368zM7.065 3.171C6.894 3.457 6.71 3.767 6.517 4.09l2.657 3.356c.189-.318.372-.624.547-.919L7.065 3.171zM28.773 12.973l-4.367.485c-.185-.31-.374-.628-.562-.944l4.367-.485C28.404 12.352 28.59 12.665 28.773 12.973zM26.031 8.368l-3.487 1.962c-.17-.285-.341-.572-.512-.859l3.487-1.962C25.695 7.805 25.861 8.082 26.031 8.368zM22.935 3.171c.17.286.355.596.547.919l-2.657 3.356c-.189-.318-.372-.624-.547-.919L22.935 3.171z"></path><path fill="#36404d" d="M15,11c-0.814,0-1.474,0.62-1.474,1.385c0,0.511,0.739,5.979,0.742,6.006 C14.312,18.734,14.623,19,15,19s0.688-0.266,0.732-0.609c0.003-0.027,0.742-5.495,0.742-6.006C16.474,11.62,15.814,11,15,11z"></path></svg>
+      <span><b>Ошибка ввода данных!</b> Убедитесь, что все поля заполнены верно.</span>
+      <button onclick="closeError()">Попробовать снова</button>
+    </div>
+
+  </div>
+
+  <script>
+    require('./preload.js')
+    require('./renderer.js')
+  </script>
+  </body>
+</html>

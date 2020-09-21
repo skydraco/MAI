@@ -1,0 +1,19 @@
+{
+  "name": "electron",
+  "productName": "electron",
+  "description": "My Electron application description",
+  "keywords": [],
+  "main": "./main.js",
+  "version": "1.0.0",
+  "author": "denis",
+  "scripts": {
+    "start": "webpack --watch",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "electron-debug": "*"
+  },
+  "devDependencies": {
+    "electron": "9.1.2"
+  }
+}

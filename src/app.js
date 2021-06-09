@@ -16,7 +16,7 @@ window.InitializGo = function () {
     createMinInput();
     altN = document.getElementById('AltN').value;
     appN = document.getElementById('AppN').value;
-    createInput( 'alt','Альтерантива', 2, altN);
+    createInput( 'alt','Альтернатива', 2, altN);
     createInput('app', 'Критерий', 2, appN);
 };
 

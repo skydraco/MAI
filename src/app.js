@@ -1,7 +1,7 @@
 import { createInput, deleteInput, clearInput } from './gener/inputForms.js'
 import { createTable, clearTables, resultTable, clearTablesInput } from './gener/tableForms.js'
 import { calcWeight } from './math/math.js'
-import * from './math/matrix.js'
+import { MultiplyMatrix } from './math/matrix.js'
 var altN = 2, appN = 2, Alt, App;
 var weight = [];
 
